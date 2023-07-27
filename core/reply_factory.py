@@ -32,13 +32,18 @@ def record_current_answer(answer, current_question_id):
     '''
     Validates and stores the answer for the current question to session.
     '''
-    return True, ""
+    if answer==PYTHON_QUESTION_LIST[current_question_id]["answer"]:
+        return True, ""
+    return False, ""
+    
 
 
 def get_next_question(current_question_id):
     '''
     Fetches the next question from the PYTHON_QUESTION_LIST based on the current_question_id.
     '''
+    if len(PYTHON_QUESTION_LIST)>current_question_id:
+        return PYTHON_QUESTION_LIST[current_question_id + 1],current_question_id + 1
 
     return "dummy question", -1
 
@@ -49,4 +54,5 @@ def generate_final_response(session):
     by the user for questions in the PYTHON_QUESTION_LIST.
     '''
 
-    return "dummy result"
+    return f"Final Score :{str(len(session['message_history']))}"
+
